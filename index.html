@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClaimGuard — AI Health Claim Denial Defense & 360° Advocacy Ecosystem</title>
+  <meta name="description" content="AI health claim defense engine. Analyzes adverse determinations against master policy documents with verified plan-type detection, sourced state statutory lookup, side-by-side visual diffs, and 1-click formal appeals.">
+  
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Persistent Unmissable Legal Disclaimer Banner -->
+  <aside class="top-disclaimer-banner" role="banner" aria-label="Legal Disclaimer">
+    <div class="top-disclaimer-inner">
+      <div class="disclaimer-badge">LEGAL NOTICE</div>
+      <span class="disclaimer-text">
+        <strong>ClaimGuard is not a law firm and does not provide legal advice.</strong> Citations are provided for reference and should be verified before use in a formal appeal.
+      </span>
+    </div>
+  </aside>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-container">
+        <div class="brand-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-title">ClaimGuard</span>
+          <span class="brand-badge">360° Patient Defense</span>
+        </div>
+      </div>
+
+      <!-- Instant Demo Selector Toolbar -->
+      <div class="demo-selector-bar" role="tablist" aria-label="Demo Presets">
+        <button id="btn-demo-sarah" class="demo-btn active" onclick="loadDataset('sarah_mri')">
+          <span>⚡</span>
+          <span>Sarah M. ($3,500 Knee MRI — Defect Found)</span>
+        </button>
+        <button id="btn-demo-marcus" class="demo-btn" onclick="loadDataset('marcus_cosmetic')">
+          <span>⚖️</span>
+          <span>Marcus T. (Valid Denial Edge Case)</span>
+        </button>
+        <button id="btn-toggle-upload" class="demo-btn" onclick="toggleUploadStudio()">
+          <span>📂</span>
+          <span>Upload Custom</span>
+        </button>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn-secondary" onclick="switchEcosystemTab('verbal')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>Phone Battle Card</span>
+        </button>
+        <button class="btn-primary" onclick="switchEcosystemTab('written')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <span>1-Click Appeal Letter</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Body -->
+  <main class="main-wrapper">
+
+    <!-- Top Key Metrics Strip -->
+    <section class="metrics-strip" aria-label="Claim Overview Statistics">
+      <div class="metric-card danger">
+        <div class="metric-info">
+          <span class="metric-label">Patient Responsibility</span>
+          <span class="metric-value" id="metric-billed">$3,500.00</span>
+          <span class="metric-sub" id="metric-sub-billed">Billed for CPT 73721</span>
+        </div>
+        <div class="metric-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+      </div>
+
+      <div class="metric-card success">
+        <div class="metric-info">
+          <span class="metric-label">Potential Recovery</span>
+          <span class="metric-value" id="metric-savings" style="color: #34D399;">$3,500.00</span>
+          <span class="metric-sub" id="metric-sub-savings">100% In-Network Benefit</span>
+        </div>
+        <div class="metric-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+      </div>
+
+      <div class="metric-card primary">
+        <div class="metric-info">
+          <span class="metric-label">Grounding Integrity</span>
+          <span class="metric-value" id="metric-grounding">100% Cited & Verified</span>
+          <span class="metric-sub">Zero Hallucinations Verified</span>
+        </div>
+        <div class="metric-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+      </div>
+
+      <div class="metric-card accent">
+        <div class="metric-info">
+          <span class="metric-label">Appeal Win Probability</span>
+          <span class="metric-value" id="metric-probability">98.2%</span>
+          <span class="metric-sub" id="metric-sub-probability">Pre-Auth PA-884920 on File</span>
+        </div>
+        <div class="metric-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Status Banner Alert -->
+    <div id="status-banner" class="status-banner erroneous">
+      <div class="status-banner-content">
+        <div class="status-indicator-badge" id="status-badge-icon">
+          ⚠️
+        </div>
+        <div>
+          <div class="status-headline" id="status-headline">Erroneous Claim Denial Detected (Payer Error)</div>
+          <div class="status-description" id="status-desc">ApexHealth cited Remark Code CO-50 (Missing Pre-Authorization), but valid Authorization #PA-884920 was approved on 07/31/2026.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         FEATURE 1 & 2: PLAN-TYPE DETECTOR & VERIFIED STATUTORY CITATION GATE
+         ========================================================================== -->
+    <section class="plan-gate-panel" aria-label="Plan Type and Statutory Jurisdiction Gate">
+      <div class="plan-gate-header">
+        <div class="gate-badge-group">
+          <span class="gate-badge">⚖️ Step 1 Gate: Plan-Type & Jurisdiction Engine</span>
+          <span style="font-size: 0.8rem; color: #CBD5E1;">Determines whether ERISA or State Prompt-Pay Law applies — gates all legal citations</span>
+        </div>
+
+        <div class="plan-selectors-row">
+          <div class="select-control-group">
+            <label for="plan-type-select" class="select-control-label">Health Plan Type:</label>
+            <select id="plan-type-select" class="plan-select-dropdown" onchange="onPlanTypeChanged(this.value)">
+              <option value="employer_fully_insured">Employer Fully-Insured (ERISA + State Law)</option>
+              <option value="employer_self_funded">Employer Self-Funded (ASO / ERISA Only)</option>
+              <option value="individual_marketplace">Individual / ACA Marketplace (State Law Only)</option>
+              <option value="government_medicare_medicaid">Government (Medicare / Medicaid / Tricare)</option>
+              <option value="unknown">Unknown / Not Specified (ACA § 2719 Default)</option>
+            </select>
+          </div>
+
+          <div class="select-control-group">
+            <label for="state-select" class="select-control-label">Payer State Jurisdiction:</label>
+            <select id="state-select" class="plan-select-dropdown" onchange="onStateChanged(this.value)">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Jurisdiction Card & Verified Sourced Statute Lookup Box -->
+      <div class="plan-jurisdiction-card">
+        <div class="jurisdiction-info">
+          <div class="jurisdiction-title" id="jurisdiction-governing-title">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span id="jurisdiction-name">Employer Fully-Insured Group Policy</span>
+          </div>
+          <div class="jurisdiction-desc" id="jurisdiction-note">
+            Both ERISA procedural rights (29 U.S.C. § 1133) and State Department of Insurance prompt-pay statutes apply.
+          </div>
+        </div>
+
+        <div class="statute-verified-box" id="statute-box-container">
+          <div class="statute-tag">
+            <span id="statute-tag-title">Minn. Stat. § 62Q.75</span>
+            <span style="font-size: 0.68rem;" id="statute-verified-date">✓ Verified: 2026-06-15</span>
+            <span class="statute-src-pill" id="statute-source-badge">ClaimGuard Verified Registry</span>
+          </div>
+          <div class="statute-penalty" id="statute-penalty-text">
+            Mandatory 1.5% monthly interest penalty on delinquent clean claims.
+          </div>
+          <a id="statute-official-link" href="https://www.revisor.mn.gov/statutes/cite/62Q.75" target="_blank" rel="noopener noreferrer" class="statute-verify-link">
+            <span>Verify official state statute text</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FEATURE 4: 360° DEFENSE ECOSYSTEM TAB BAR
+         ========================================================================== -->
+    <nav class="ecosystem-tabs-bar" role="tablist" aria-label="360 Defense Ecosystem Navigation">
+      <button id="tab-btn-visual" class="ecosystem-tab-btn active" onclick="switchEcosystemTab('visual')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="m14 9 3 3-3 3"/></svg>
+        <span>1. Visual Evidence (Side-by-Side Diff)</span>
+        <span class="tab-badge" id="tab-badge-visual">Grounded</span>
+      </button>
+      <button id="tab-btn-written" class="ecosystem-tab-btn" onclick="switchEcosystemTab('written')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <span>2. Written Defense (Formal Appeal Letter)</span>
+        <span class="tab-badge" id="tab-badge-written">PDF Ready</span>
+      </button>
+      <button id="tab-btn-verbal" class="ecosystem-tab-btn" onclick="switchEcosystemTab('verbal')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>3. Verbal Defense (Phone Battle Card)</span>
+        <span class="tab-badge" id="tab-badge-verbal">4 Steps</span>
+      </button>
+    </nav>
+
+    <!-- ==========================================================================
+         PANEL 1: VISUAL EVIDENCE (SIDE-BY-SIDE DIFF WORKSPACE)
+         ========================================================================== -->
+    <section id="panel-visual" class="ecosystem-panel active">
+      <div class="diff-workspace" aria-label="Visual Discrepancy Comparison">
+        
+        <!-- Left Pane: Denial Notice (EOB) with Red Bounding Box -->
+        <div class="doc-pane denial">
+          <div class="doc-pane-header">
+            <div class="doc-pane-title-group">
+              <span class="doc-badge red">Denial Document</span>
+              <span class="doc-title" id="doc-title-denial">Explanation of Benefits (EOB)</span>
+            </div>
+            <span style="font-size: 0.72rem; color: var(--text-light-muted);" id="doc-meta-denial">Date: 08/28/2026</span>
+          </div>
+
+          <div class="doc-paper-viewport" id="viewport-denial">
+            <!-- Populated dynamically -->
+          </div>
+
+          <div style="padding: 8px 12px; background: rgba(0,0,0,0.2); font-size: 0.72rem; color: var(--text-light-muted); display: flex; justify-content: space-between;">
+            <span>Red highlight = Erroneous denial rationale</span>
+            <span style="color: #F87171; font-weight: 600;">Code CO-50 Flagged</span>
+          </div>
+        </div>
+
+        <!-- Center Connector: Mismatch Intelligence Bridge -->
+        <div class="mismatch-bridge">
+          <div style="text-align: center;">
+            <div class="bridge-tag">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              <span>RAG Discrepancy Engine</span>
+            </div>
+            <h2 style="font-size: 0.95rem; font-weight: 800; color: #FFFFFF; margin-top: 0.5rem;">Discrepancy Analysis</h2>
+          </div>
+
+          <div class="bridge-discrepancy-list" id="bridge-discrepancy-container">
+            <!-- Discrepancy items injected dynamically -->
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <button class="btn-primary" onclick="switchEcosystemTab('written')" style="width: 100%; justify-content: center;">
+              <span>Open Written Appeal</span>
+            </button>
+            <button class="btn-secondary" onclick="switchEcosystemTab('verbal')" style="width: 100%; justify-content: center;">
+              <span>Open Phone Battle Card</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Pane: Master Policy Document with Green Bounding Box -->
+        <div class="doc-pane policy">
+          <div class="doc-pane-header">
+            <div class="doc-pane-title-group">
+              <span class="doc-badge green">Policy Document</span>
+              <span class="doc-title" id="doc-title-policy">ApexHealth Comprehensive PPO</span>
+            </div>
+            <span style="font-size: 0.72rem; color: var(--text-light-muted);" id="doc-meta-policy">Handbook § 4.2</span>
+          </div>
+
+          <div class="doc-paper-viewport" id="viewport-policy">
+            <!-- Populated dynamically -->
+          </div>
+
+          <div style="padding: 8px 12px; background: rgba(0,0,0,0.2); font-size: 0.72rem; color: var(--text-light-muted); display: flex; justify-content: space-between;">
+            <span>Green highlight = Policy rule proving coverage</span>
+            <span style="color: #34D399; font-weight: 600;">Coverage Verified</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 2: WRITTEN DEFENSE (1-CLICK FORMAL APPEAL LETTER & PDF)
+         ========================================================================== -->
+    <section id="panel-written" class="ecosystem-panel">
+      <div class="written-defense-container" id="written-defense-content">
+        <!-- Injected dynamically via renderWrittenDefense() -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PANEL 3: VERBAL DEFENSE (PHONE NEGOTIATION BATTLE CARD)
+         ========================================================================== -->
+    <section id="panel-verbal" class="ecosystem-panel">
+      <div class="verbal-defense-container" id="verbal-defense-content">
+        <!-- Injected dynamically via renderVerbalDefense() -->
+      </div>
+    </section>
+
+    <!-- Collapsible Upload Studio (Live Dropzone) -->
+    <section id="upload-panel" class="upload-panel">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 1.1rem; color: #FFFFFF; font-weight: 700;">📂 Custom Document Ingestion Studio</h3>
+        <button class="btn-secondary" onclick="toggleUploadStudio()" style="padding: 4px 10px; font-size: 0.75rem;">Close</button>
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-light-muted); margin-top: 4px;">Upload your Denial Explanation of Benefits (PDF/Image) and Policy Handbook to trigger real-time OCR extraction & RAG alignment.</p>
+      
+      <div class="dropzone-grid">
+        <div class="dropzone-box" onclick="simulateUpload('denial')">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" style="margin: 0 auto;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <div class="dropzone-title">1. Upload Denial Notice (EOB)</div>
+          <div class="dropzone-sub">PDF, PNG, or TIFF (Extracts Remark Codes & CPT)</div>
+        </div>
+        <div class="dropzone-box" onclick="simulateUpload('policy')">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" style="margin: 0 auto;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <div class="dropzone-title">2. Upload Policy Document</div>
+          <div class="dropzone-sub">Benefit Booklet or Summary Plan Description PDF</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       TRUST & GROUNDING CITATION INSPECTOR DRAWER / MODAL
+       ========================================================================== -->
+  <div id="citation-drawer" class="citation-drawer-overlay" onclick="closeCitationDrawerOnBackdrop(event)">
+    <div class="citation-card-modal">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <span class="gate-badge" style="background: rgba(16, 185, 129, 0.2); color: #34D399; border-color: rgba(52, 211, 153, 0.4);">
+          ✓ 100% Grounded Source Excerpt
+        </span>
+        <button class="btn-secondary" onclick="closeCitationDrawer()" style="padding: 4px 8px; font-size: 0.8rem;">✕</button>
+      </div>
+
+      <div>
+        <h3 id="cite-modal-title" style="font-size: 1.05rem; font-weight: 700; color: #FFFFFF;">Citation Details</h3>
+        <p id="cite-modal-location" style="font-size: 0.78rem; color: var(--text-light-muted); margin-top: 2px;"></p>
+      </div>
+
+      <div>
+        <span class="meta-item-label">Verbatim OCR Extracted Text:</span>
+        <div class="citation-quote-box" id="cite-modal-quote">
+          <!-- Raw Quote Text -->
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; background: rgba(0,0,0,0.3); padding: 0.75rem; border-radius: 8px;">
+        <div>
+          <div style="font-size: 0.7rem; color: var(--text-light-muted); text-transform: uppercase; font-weight: 700;">Source Document</div>
+          <div style="color: #FFFFFF; font-size: 0.78rem; font-weight: 600;" id="cite-modal-source">ApexHealth EOB</div>
+        </div>
+        <div>
+          <div style="font-size: 0.7rem; color: var(--text-light-muted); text-transform: uppercase; font-weight: 700;">Verification Method</div>
+          <div style="color: #FFFFFF; font-size: 0.78rem; font-weight: 600;" id="cite-modal-method">Deterministic Layout OCR</div>
+        </div>
+      </div>
+
+      <!-- Legal Disclaimer in Modal -->
+      <div style="font-size: 0.72rem; color: #94A3B8; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.25); padding: 6px 10px; border-radius: 6px;">
+        <strong>Disclaimer:</strong> ClaimGuard is not a law firm. Verify original document excerpts before filing.
+      </div>
+
+      <button class="btn-primary" onclick="closeCitationDrawer()" style="width: 100%; justify-content: center;">
+        Close Inspector
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

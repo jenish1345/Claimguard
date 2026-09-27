@@ -1,0 +1,18 @@
+/* Sample-loader pills in the engine's glass form (see Tr() in engine.ts). */
+.cf-f button {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 0 17px 0 46px;
+  border: 0;
+  border-radius: inherit;
+  background: none;
+  color: #fff;
+  font: 400 14px/20px var(--text);
+  text-align: left;
+  cursor: pointer;
+}
+.cf-f button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}

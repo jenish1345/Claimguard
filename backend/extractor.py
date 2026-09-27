@@ -77,7 +77,8 @@ async def extract_fields(notice_text: str) -> dict[str, Any]:
     try:
         fields = json.loads(response_text)
     except json.JSONDecodeError as e:
-        raise ValueError(f"Claude returned invalid JSON: {e}\nResponse: {response_text}")
+        # Don't echo the response: main.py logs this message and it holds notice PII.
+        raise ValueError(f"Claude returned invalid JSON: {e}")
 
     # Ensure raw_text_snippet is present
     if "raw_text_snippet" not in fields or not fields["raw_text_snippet"]:

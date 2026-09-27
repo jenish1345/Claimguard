@@ -72,7 +72,8 @@ class AnalyzeResponse(BaseModel):
 
 @app.get("/health")
 async def health_check():
-    return {"status": "ok", "service": "snap-notice-checker"}
+    extractor = "claude" if os.environ.get("ANTHROPIC_API_KEY") else "keyword-fallback"
+    return {"status": "ok", "service": "snap-notice-checker", "extractor": extractor}
 
 
 @app.post("/analyze", response_model=AnalyzeResponse)
